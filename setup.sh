@@ -40,5 +40,5 @@ do
 	if [[ "$var" = "--add-net-alias" ]]; then
         IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' kind-control-plane)
         sudo ifconfig lo0 alias $IP
-    done
+    fi
 done
