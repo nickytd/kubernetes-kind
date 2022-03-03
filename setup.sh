@@ -18,8 +18,13 @@ then
     exit
 fi
 
-echo "create cluster"
-kind create cluster --name kind --config ${dir}/kind-config.yaml
+echo "check for kind cluster"
+if [[ `kind get clusters` == "kind" ]]; then
+    echo "kind cluster found"
+else
+    echo "create kind cluster"
+    kind create cluster --name kind --config ${dir}/kind-config.yaml
+fi
 
 kubectl cluster-info --context kind-kind
 
