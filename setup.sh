@@ -25,7 +25,7 @@ else
     config="${dir}/kind-config.yaml"
     for var in "$@"
     do
-      if [[ "$var" = "--with-calico" ]]; then
+      if [[ "$var" = "--calico" ]]; then
         echo "create kind cluster with calico CNI"
         config="${dir}/kind-config-calico.yaml"
       fi
@@ -44,12 +44,12 @@ kind get nodes | xargs -I{} docker exec -t {} sysctl fs.inotify.max_user_instanc
 
 for var in "$@"
 do
-    if [[ "$var" = "--with-calico" ]]; then
+    if [[ "$var" = "--calico" ]]; then
         echo "deploy calico"
         $dir/../kubernetes-calico/setup.sh
     fi
 
-    if [[ "$var" = "--with-ingress-controller" ]]; then
+    if [[ "$var" = "--ingress-controller" ]]; then
 		echo "deploy nginx-ingress controler"
 		kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 		kubectl wait --for=condition=ready pod -l app.kubernetes.io/component=controller -n ingress-nginx --timeout=15m
