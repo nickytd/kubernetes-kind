@@ -4,7 +4,7 @@ set -eo pipefail
 
 dir=$(dirname $0)
 
-echo "setting up kind cluster"
+echo "setting up the kind cluster"
 
 if ! command -v kind &> /dev/null
 then
