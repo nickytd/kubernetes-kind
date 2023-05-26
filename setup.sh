@@ -23,8 +23,7 @@ if [[ `kind get clusters` == "kind" ]]; then
     echo "kind cluster found"
 else
     config="${dir}/kind-config.yaml"
-    for var in "$@"
-    do
+    for var in "$@"; do
       if [[ "$var" = "--calico" ]]; then
         echo "create kind cluster with calico CNI"
         config="${dir}/kind-config-calico.yaml"
